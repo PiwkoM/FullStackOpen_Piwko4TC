@@ -8,3 +8,8 @@ Done!.. or should be..
 thats why! 
 3.1. Open up visual studio code, open new terminal, type in npm - if you get error then its fucked up :)
 sooo, typical way of solving shit is turning off and back on - try it, if it still throws error then bro better start looking for a different or ask ChatGPT but usualy it doesn't help.
+
+
+
+(git config --local user.name)
+(git config --local user.email)
