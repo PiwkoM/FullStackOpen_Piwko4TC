@@ -1,67 +1,25 @@
 import { useState } from 'react'
 
-const StatisticLine = (props) => {
-  return(
-    <tr>
-      <td> {props.text} </td>
-      <td> {props.value} </td>
-    </tr>
-  )
-}
-
-const Statisticss = (props) =>{
-  let tot = (props.good+props.neutral+props.bad)
-  if(tot ==0){
-    return(
-      <>
-      <p>No data found</p>
-      </>
-    )
-  }
-  return(
-      <table>
-        <tbody>
-      <StatisticLine text="good" value={props.good}/>
-      <StatisticLine text="neutral" value={props.neutral}/>
-      <StatisticLine text="bad" value={props.bad}/>
-      <StatisticLine text="total" value={tot}/>
-      <StatisticLine text="average" value={(props.good*1+props.bad*-1)/tot+'%'}/>
-      <StatisticLine text="positive" value={props.good*100/tot+'%'}/>
-        </tbody>
-      </table>
-  )
-  
-}
-
 const App = () => {
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-
-  const hanG = () =>{
-      setGood(good+1)
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.'
+  ]
+   
+  const [selected, setSelected] = useState(0)
+  const next = () =>{
+      setSelected(Math.floor(Math.random() * anecdotes.length))
   }
-  const hanN = () =>{
-      setNeutral(neutral+1)
-  }
-  const hanM = () =>{
-      setBad(bad+1)
-  }
-
   return (
     <div>
-      <h1>give feedback</h1>
-      <button onClick={hanG}>good</button>
-      <button onClick={hanN}>neutral</button>
-      <button onClick={hanM}>MORBIUS!!!!!</button>
-      <h1>statistics</h1>
-      <Statisticss good={good} neutral={neutral} bad={bad}/>
-      {/* <p>gud {good}</p>
-      <p>nutral {neutral}</p>
-      <p>morbius {bad}</p>
-      <p>total {(good+neutral+bad)}</p>
-      <p>average {(good-bad)/(good+neutral+bad)}</p>
-      <p>positive {good/(good+neutral+bad)}%</p> */}
+      {anecdotes[selected]}
+      <br></br><button onClick={next}>next</button>
     </div>
   )
 }
