@@ -13,13 +13,25 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState([0,0,0,0,0,0,0,0])
   const next = () =>{
       setSelected(Math.floor(Math.random() * anecdotes.length))
   }
+
+  const vote = () =>{
+    const dog = [...votes]
+    dog[selected]+=1 
+    setVotes(dog)
+      // points[selected] == null ? points[selected].set(1) : points[selected].set(points[selected]+1);
+  }
+
   return (
     <div>
       {anecdotes[selected]}
+      <br></br>
+      votes: {votes[selected]}
       <br></br><button onClick={next}>next</button>
+      <button onClick={vote}>Vote</button>
     </div>
   )
 }
