@@ -1,11 +1,11 @@
-const Course = ({course}) =>{
-    return(
+const Course = ({ course }) => {
+    return (
       <div>
-        <Header name={course.name}/>
-        <Content parts={course.parts}/>
+        <Header name={course.name} />
+        <Content parts={course.parts} />
       </div>
-    )
-  }
+    );
+  };
   
   const Header = ({name}) => {
     return(
@@ -25,13 +25,14 @@ const Course = ({course}) =>{
     // totalArray.forEach(element => {
     //     total += element
     // });
+
     return(
       //.map(objectOfArray => ()) == foreach objectOfArray in {}
       <div>
       {parts.map(part =>  (
         <Part key={part.id} part={part}/>
       ))}
-      <p>Total exercises: {total}</p>
+      <p><b>Total exercises: {total}</b></p>
       </div>
     )
   }
