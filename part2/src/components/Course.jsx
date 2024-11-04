@@ -15,12 +15,23 @@ const Course = ({course}) =>{
   }
   
   const Content = ({parts}) => {
+    const totalArray = parts.map(part => Number(part.exercises)) 
+    
+    //complete honesty here, i still have no idea how .reduce() works.
+    const total = totalArray.reduce((sum, exercises) => sum + exercises, 0);
+
+    // let total = 0;
+    // console.log(totalArray)
+    // totalArray.forEach(element => {
+    //     total += element
+    // });
     return(
       //.map(objectOfArray => ()) == foreach objectOfArray in {}
       <div>
       {parts.map(part =>  (
         <Part key={part.id} part={part}/>
       ))}
+      <p>Total exercises: {total}</p>
       </div>
     )
   }
