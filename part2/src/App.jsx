@@ -1,22 +1,20 @@
-import { useState } from 'react'
-import Note from './components/Note'
-
-const App = (props) => {
-    const { notes } = props
-  
-    return (
-      <div>
-        <h1>Notes</h1>
-        <ul>
-          {notes.map(note => 
-  
-            <li>
-              {note.content}
-            </li>
-          )}
-        </ul>
-      </div>
-    )
+import Note from './components/Notes'
+const Note = ({ note }) => {
+  return (
+    <li>{note.content}</li>
+  )
 }
 
-export default App
+const App = ({ notes }) => {
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
+        )}
+      </ul>
+    </div>
+  )
+}
