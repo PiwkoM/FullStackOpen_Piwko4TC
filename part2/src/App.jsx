@@ -13,12 +13,13 @@ const App = () => {
   const addName = (e) =>{
     e.preventDefault()
     console.log(newName)
+    // if(persons.filter((item,index) => persons.indexOf(item)!==index)){
+    //   alert(`${newName} is already added to phonebook`)
+    // } else { setPersons(persons.concat({name: newName})) }
     setPersons(persons.concat({name: newName}))
+    setNewName('')
   }
 
-  const Person = (p) =>{
-    <div>{p.name}</div>
-  }
 
   return (
     <div>
