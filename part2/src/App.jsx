@@ -13,6 +13,10 @@ const App = () => {
   const addName = (e) =>{
     e.preventDefault()
     console.log(newName)
+    {/* 
+        .some() iterates through array and check if object meets requirement specified
+        after the '=>' symbol
+    */}
     if(persons.some(person => person.name === newName)){
       alert(`${newName} is already added to phonebook`)
     } else { setPersons(persons.concat({name: newName})) }
