@@ -13,10 +13,9 @@ const App = () => {
   const addName = (e) =>{
     e.preventDefault()
     console.log(newName)
-    // if(persons.filter((item,index) => persons.indexOf(item)!==index)){
-    //   alert(`${newName} is already added to phonebook`)
-    // } else { setPersons(persons.concat({name: newName})) }
-    setPersons(persons.concat({name: newName}))
+    if(persons.some(person => person.name === newName)){
+      alert(`${newName} is already added to phonebook`)
+    } else { setPersons(persons.concat({name: newName})) }
     setNewName('')
   }
 
