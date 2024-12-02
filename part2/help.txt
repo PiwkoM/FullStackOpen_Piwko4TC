@@ -1,2 +1,8 @@
-get json server: npx json-server --port 3001 --watch db.json
+bind(?)/append(?) server to json list/file : npx json-server --port 3001 --watch db.json
+run server : npm run server
 (if port 3001 is taken, close all apps using 3001 or use another port)
+
+CTRL+C prompts to terminate batch operations, allowing the execution of commands in terminal without the
+boot of a different one
+
+!NOTE: closes app AND server when executed.
