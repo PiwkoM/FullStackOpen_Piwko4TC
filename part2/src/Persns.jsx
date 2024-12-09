@@ -1,13 +1,16 @@
-const Persons = ({ persons }) => {
+import axios from 'axios';
 
-    return (
-      <div>
-        {persons.map(p => (
-          <div key={p.name}>{p.name} {p.number} <button onClick={delUser(p.id)}>delete</button></div>
-        ))}
-      </div>
-    )
-  }
-  
-  export default Persons
-  
+const Persons = ({ persons, deletePerson }) => {
+  return (
+    <div>
+      {persons.map(p => (
+        <div key={p.id}>
+          {p.name} {p.number} 
+          <button onClick={() => deletePerson(p.id)}>delete</button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Persons;
