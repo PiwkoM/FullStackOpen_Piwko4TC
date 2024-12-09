@@ -1,18 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Persons from './Persns'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: "55-44-55-44" },
-    { name: 'Ada Lovelace', number: "39-44-5323523" },
-    { name: 'Dan Abramov', number: "12-43-234345" },
-    { name: 'Mary Poppendieck', number: "39-23-6423122" }
-  ]) 
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [finder, setFinder] = useState('')
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data:', error)
+      })
+  }, [])
 
   const inputChange = (event) => {
     setNewName(event.target.value)
@@ -56,6 +63,3 @@ const App = () => {
 }
 
 export default App
-
-
-{/* {persons.map(p => (<div key={p.name}>{p.name} {p.number} </div>))} */}
