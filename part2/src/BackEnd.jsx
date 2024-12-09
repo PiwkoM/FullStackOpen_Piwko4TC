@@ -14,6 +14,13 @@ const addPerson = (newName, newNumber) => {
   return axios.post('http://localhost:3001/persons', personObject).then(response => response.data);
 };
 
+// Update a person's phone number (PUT method)
+const updatePerson = (id, newNumber) => {
+  const updatedPerson = { number: newNumber };
+  return axios.put(`http://localhost:3001/persons/${id}`, updatedPerson)
+    .then(response => response.data);
+};
+
 // Delete a person by ID
 const deletePerson = (id) => {
   return axios.delete(`http://localhost:3001/persons/${id}`)
@@ -26,4 +33,4 @@ const deletePerson = (id) => {
     });
 };
 
-export default { addPerson, getPersons, deletePerson };
+export default { addPerson, getPersons, updatePerson, deletePerson };

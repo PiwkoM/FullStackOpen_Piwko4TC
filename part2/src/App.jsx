@@ -32,8 +32,19 @@ const App = () => {
 
   const addName = (e) => {
     e.preventDefault();
-    if (persons.some(person => person.name === newName) || persons.some(person => person.number === newNumber)) {
-      alert(`${newName} or ${newNumber} is already added to phonebook`);
+    
+    const existingPerson = persons.find(person => person.name === newName);
+    if (existingPerson) {
+      if (window.confirm(`${newName} is already in the phonebook. Do you want to update their number?`)) {
+        BackEnd.updatePerson(existingPerson.id, newNumber).then(updatedPerson => {
+          setPersons(persons.map(person => 
+            person.id !== updatedPerson.id ? person : updatedPerson
+          ));
+        }).catch(error => {
+          console.error('Error updating person:', error);
+          alert('Failed to update the phone number');
+        });
+      }
     } else {
       BackEnd.addPerson(newName, newNumber).then(newPerson => {
         setPersons(persons.concat(newPerson));
@@ -43,17 +54,10 @@ const App = () => {
     }
   };
 
-  const filteredPersons = persons.filter(person =>
-    person.name.toLowerCase().includes(finder.toLowerCase())
+  // Safeguard against undefined 'name' properties
+  const filteredPersons = persons.filter(person => 
+    person.name && person.name.toLowerCase().includes((finder || '').toLowerCase())
   );
-
-  const deletePerson = (id) => {
-    if (window.confirm('Are you sure you want to delete this entry?')) {
-      BackEnd.deletePerson(id).then(() => {
-        setPersons(prevPersons => prevPersons.filter(person => person.id !== id));
-      });
-    }
-  };
 
   return (
     <div>
@@ -64,7 +68,7 @@ const App = () => {
       <PersonForm newName={newName} newNumber={newNumber} inputChange={inputChange} inputChange_num={inputChange_num} addName={addName} />
 
       <h3>Numbers</h3>
-      <Persns persons={filteredPersons} deletePerson={deletePerson} />
+      <Persns persons={filteredPersons} />
     </div>
   );
 };
