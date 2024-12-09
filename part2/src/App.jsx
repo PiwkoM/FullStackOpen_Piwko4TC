@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Persons from './Persns'
+import BackEnd from './BackEnd'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,14 +11,11 @@ const App = () => {
   const [finder, setFinder] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
-      .catch(error => {
-        console.error('There was an error fetching the data:', error)
-      })
+    BackEnd.getPersons().then(response => {
+      setPersons(response)
+    }).catch(error => {
+      console.error('There was an error fetching the data:', error)
+    })
   }, [])
 
   const inputChange = (event) => {
@@ -38,10 +35,12 @@ const App = () => {
     if (persons.some(person => person.name === newName) || persons.some(person => person.number === newNumber)) {
       alert(`${newName} or ${newNumber} is already added to phonebook`)
     } else {
-      setPersons(persons.concat({ name: newName, number: newNumber }))
+      BackEnd.addPerson(newName, newNumber).then(newPerson => {
+        setPersons(persons.concat(newPerson))
+        setNewName('')
+        setNewNumber('')
+      })
     }
-    setNewName('')
-    setNewNumber('')
   }
 
   const filteredPersons = persons.filter(person =>
