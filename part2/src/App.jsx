@@ -53,8 +53,7 @@ const App = () => {
       });
     }
   };
-
-  // Safeguard against undefined 'name' properties
+  
   const filteredPersons = persons.filter(person => 
     person.name && person.name.toLowerCase().includes((finder || '').toLowerCase())
   );

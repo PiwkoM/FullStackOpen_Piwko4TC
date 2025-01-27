@@ -22,16 +22,19 @@ const updatePerson = (id, newNumber) => {
     .then(response => response.data);
 };
 
-// Delete a person by ID
-const deletePerson = (id) => {
-  return axios.delete(`http://localhost:3001/persons/${id}`)
-    .then(() => {
+const deletePerson = async (id) => {
+  const prsn = (await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
+  if(confirm(`Are you sure you want to delete ${prsn}`)){
+    try {
+      await axios.delete(`http://localhost:3001/persons/${id}`);
       console.log(`Person with ID ${id} deleted successfully.`);
-    })
-    .catch(error => {
+    } catch (error) {
       console.error('Error deleting person:', error);
-      alert('Failed to delete the person');
-    });
+      alert(error.response ? `Failed to delete the person: ${error.response.data.message}` : 'Failed to delete the person');
+    }
+  } else {
+    console.log(`Removal of ${id} terminated`)
+  }
 };
 
 export default { addPerson, getPersons, updatePerson, deletePerson };

@@ -1,12 +1,13 @@
 import axios from 'axios';
+// import BackEnd from './BackEnd';
 
 const Persons = ({ persons, deletePerson }) => {
   return (
-    <div>
+    <div> 
       {persons.map(p => (
         <div key={p.id}>
           {p.name} {p.number} 
-          <button onClick={() => deletePerson(p.id)}>delete</button>
+          <button onClick={() => BackEnd.deletePerson(p.id)}>delete</button>
         </div>
       ))}
     </div>
