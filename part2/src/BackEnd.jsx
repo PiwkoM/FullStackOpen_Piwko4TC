@@ -1,11 +1,9 @@
 import axios from "axios";
 
-// Get all persons
 const getPersons = () => {
   return axios.get('http://localhost:3001/persons').then(response => response.data);
 };
 
-// Add a new person
 const addPerson = (newName, newNumber) => {
   const personObject = {
     name: newName,
@@ -22,6 +20,8 @@ const updatePerson = (id, newNumber) => {
     .then(response => response.data);
 };
 
+
+/*!!!doesnt refresh page, fix later!!!*/
 const deletePerson = async (id) => {
   const prsn = (await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
   if(confirm(`Are you sure you want to delete ${prsn}`)){

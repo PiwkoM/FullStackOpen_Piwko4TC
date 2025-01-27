@@ -33,6 +33,7 @@ const App = () => {
   const addName = (e) => {
     e.preventDefault();
     
+    /*!!! adds person without name, fix later !!!*/
     const existingPerson = persons.find(person => person.name === newName);
     if (existingPerson) {
       if (window.confirm(`${newName} is already in the phonebook. Do you want to update their number?`)) {

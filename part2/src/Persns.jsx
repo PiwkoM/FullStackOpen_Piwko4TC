@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import BackEnd from './BackEnd';
+import BackEnd from './BackEnd';
 
 const Persons = ({ persons, deletePerson }) => {
   return (
