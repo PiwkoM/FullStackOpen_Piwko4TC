@@ -12,6 +12,7 @@ const addPerson = (newName, newNumber) => {
     number: newNumber,
   };
   return axios.post('http://localhost:3001/persons', personObject).then(response => response.data);
+
 };
 
 // Update a person's phone number (PUT method)
