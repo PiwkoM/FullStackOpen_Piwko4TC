@@ -14,16 +14,17 @@ const addPerson = (newName, newNumber) => {
 };
 
 // Update a person's phone number (PUT method)
-const updatePerson = (id, newNumber) => {
-  const updatedPerson = { number: newNumber };
+const updatePerson = (id, newName, newNumber) => {
+  const updatedPerson = {name:newName, number: newNumber };
   return axios.put(`http://localhost:3001/persons/${id}`, updatedPerson)
     .then(response => response.data);
+    
 };
 
 
-/*!!!doesnt refresh page, fix later!!!*/
-const deletePerson = async (id) => {
-  const prsn = (await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
+/*!!! doesnt refresh page, maybe due to async? !!!*/
+const deletePerson =  async (id) => {
+  const prsn = ( await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
   if(confirm(`Are you sure you want to delete ${prsn}`)){
     try {
       await axios.delete(`http://localhost:3001/persons/${id}`);
