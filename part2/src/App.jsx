@@ -51,38 +51,44 @@ const App = () => {
 
 
 
-  const addName = (e) => {
-    e.preventDefault();
+  // const addName = (e) => {
+  //   e.preventDefault();
     
-    /*!!! adds person without name, fix later !!!*/
-    const existingPerson = persons.find(person => person.name === newName);
-    if (existingPerson) {
-      if (window.confirm(`${newName} is already in the phonebook. Do you want to update their number?`)) {
-        BackEnd.updatePerson(existingPerson.id, newName, newNumber).then(updatedPerson => {
-          setPersons(persons.map(person => 
-            person.id !== updatedPerson.id ? person : updatedPerson
-          ));
-          setCheck(true)
-          setVisibility('visible')
-          setNotifMessage('Person updated successfuly ')
-          // setTimeout(()=>{setErrorMessage('null'),5000})
-          setTimeout(()=>{setNotifMessage(null)},5000)
+  //   /*
+  //   >be me 
+  //   >try to update number and name of person
+  //   >omit name entirely and only add number
+  //   >complain app doesnt work
+  //   */
+
+  //   const existingPerson = persons.find(person => person.name === newName);
+  //   if (existingPerson) {
+  //     if (window.confirm(`${newName} is already in the phonebook. Do you want to update their number?`)) {
+  //       BackEnd.updatePerson(existingPerson.id, newName, newNumber).then(updatedPerson => {
+  //         setPersons(persons.map(person => 
+  //           person.id !== updatedPerson.id ? person : updatedPerson
+  //         ));
+  //         setCheck(true)
+  //         setVisibility('visible')
+  //         setNotifMessage('Person updated successfuly ')
+  //         setTimeout(()=>{setNotifMessage(null)},5000)
           
-        }).catch(error => {
-          setCheck(false)
-          setNotifMessage('ERROR UPDATING ENTRY')
-          setTimeout(()=>{setNotifMessage(null),5000})
-        });
-      }
-    } else {
-      BackEnd.addPerson(newName, newNumber).then(newPerson =>
-      {
-        setPersons(persons.concat(newPerson));
-        setNewName('');
-        setNewNumber('');
-      });
-    }
-  };
+  //       }).catch(error => {
+  //         setCheck(false)
+  //         setVisibility('visible')
+  //         setNotifMessage('ERROR UPDATING ENTRY')
+  //         setTimeout(()=>{setNotifMessage(null),5000})
+  //       });
+  //     }
+  //   } else {
+  //     BackEnd.addPerson(newName, newNumber).then(newPerson =>
+  //     {
+  //       setPersons(persons.concat(newPerson));
+  //       setNewName('');
+  //       setNewNumber('');
+  //     });
+  //   }
+  // };
   
   const filteredPersons = persons.filter(person => 
     person.name && person.name.toLowerCase().includes((finder || '').toLowerCase())
@@ -95,7 +101,7 @@ const App = () => {
       <Filter finder={finder} findName={findName} />
 
       <h3>Add a new</h3>
-      <PersonForm newName={newName} newNumber={newNumber} inputChange={inputChange} inputChange_num={inputChange_num} addName={addName} />
+      <PersonForm newName={newName} newNumber={newNumber} inputChange={inputChange} inputChange_num={inputChange_num} addName={(e) => { e.preventDefault(); BackEnd.addName()}} />
 
       <h3>Numbers</h3>
       <Persns persons={filteredPersons} />
