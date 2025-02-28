@@ -2,11 +2,12 @@ import axios from "axios";
 
 /*
   axios commands: get, put, post
-  *[IMP] while post and put may look similar, they are fundamentally different
-
+  % .get() just gets stuff from the url, go figure
+  !--------------------------------------------------------------------------!
+  [IMP] while post and put may look similar, they are fundamentally different
+  EX: .put(x,y) = put/replace entry [y] in [x]
+  EX: .post(x,y) = add entry [y] to [x]
 */
-
-
 
 const getPersons = () => {
   return axios.get('http://localhost:3001/persons').then(response => response.data);
@@ -39,10 +40,10 @@ const deletePerson =  async (id) => {
 
       /*
       !! deletion doesnt actually update the persons list, but at the same time it does, 
-      resulting in error message from 2.17* not popping up and browser 2 not recognizing the fact 
-      * [IMP] browser 1 deleted the entry.
+      resulting in error message from 2.17* not popping up and browser 2 not recognizing the fact (\n)
+      [IMP] browser 1 deleted the entry.
 
-      todo: call a function to update the list after deletion (???)
+      [TODO]: call a function to update the list after deletion (???)
       */
 
     } catch (error) {
