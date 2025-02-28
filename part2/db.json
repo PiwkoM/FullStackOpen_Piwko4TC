@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "test3",
-      "number": "1234",
+      "number": "555",
       "id": "36a6"
     },
     {
@@ -19,11 +19,6 @@
       "name": "dadada",
       "number": "1113",
       "id": "8fe7"
-    },
-    {
-      "id": "9ded",
-      "name": "please",
-      "number": "work"
     }
   ]
 }

@@ -13,7 +13,7 @@ const addPerson = (newName, newNumber) => {
 
 };
 
-// update
+// Update a person's phone number (PUT method)
 const updatePerson = (id, newName, newNumber) => {
   const updatedPerson = {name:newName, number: newNumber };
   return axios.put(`http://localhost:3001/persons/${id}`, updatedPerson)
@@ -22,19 +22,13 @@ const updatePerson = (id, newName, newNumber) => {
 };
 
 
+/*!!! doesnt refresh page, maybe due to async? !!!*/
 const deletePerson =  async (id) => {
   const prsn = ( await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
   if(confirm(`Are you sure you want to delete ${prsn}`)){
     try {
       await axios.delete(`http://localhost:3001/persons/${id}`);
       console.log(`Person with ID ${id} deleted successfully.`);
-      /*
-      !! deletion doesnt actually update the persons list, but at the same time it does, 
-      resulting in error message from 2.17* not popping up and browser 2 not recognizing the fact 
-      that browser 1 deleted the entry.
-
-      ?? call a function to update the list after deletion ??
-      */
     } catch (error) {
       console.error('Error deleting person:', error);
       alert(error.response ? `Failed to delete the person: ${error.response.data.message}` : 'Failed to delete the person');
