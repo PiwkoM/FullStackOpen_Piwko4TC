@@ -27,16 +27,9 @@ const updatePerson = (id, newName, newNumber) => {
   const updatedPerson = {name:newName, number: newNumber };
   return axios.put(`http://localhost:3001/persons/${id}`, updatedPerson)
     .then(response => response.data);
-    
+
 };
 
-
-const deletePerson =  async (id) => {
-  const prsn = ( await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
-  if(confirm(`Are you sure you want to delete ${prsn}`)){
-    try {
-      await axios.delete(`http://localhost:3001/persons/${id}`);
-      console.log(`Person with ID ${id} deleted successfully.`);
 
       /*
       !! deletion doesnt actually update the persons list, but at the same time it does, 
@@ -45,6 +38,14 @@ const deletePerson =  async (id) => {
 
       [TODO]: call a function to update the list after deletion (???)
       */
+
+const deletePerson =  async (id) => {
+  const prsn = ( await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
+  if(confirm(`Are you sure you want to delete ${prsn}`)){
+    try {
+      await axios.delete(`http://localhost:3001/persons/${id}`);
+      console.log(`Person with ID ${id} deleted successfully.`);
+
 
     } catch (error) {
       console.error('Error deleting person:', error);
@@ -55,4 +56,16 @@ const deletePerson =  async (id) => {
   }
 };
 
-export default { addPerson, getPersons, updatePerson, deletePerson };
+const testDelete = (id) => {
+  return axios.delete(`http://localhost:3001/persons/${id}`).then(response => {
+    if(confirm("do you want to delete?")){
+      console.log("YIPPIE!")
+    } else {
+      console.log("aborted")
+    }
+  }).catch(error => {
+    console.error("ono :(")
+  });
+}
+
+export default { addPerson, getPersons, updatePerson, deletePerson, testDelete };

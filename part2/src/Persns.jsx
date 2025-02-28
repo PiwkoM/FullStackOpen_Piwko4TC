@@ -8,7 +8,7 @@ const Persons = ({ persons, deletePerson }) => {
       {persons.map(p => (
         <div key={p.id}>
           {p.name} {p.number} 
-          <Button variant="danger" onClick={() => BackEnd.deletePerson(p.id)}>delete</Button>
+          <Button variant="danger" onClick={() => BackEnd.testDelete(p.id)}>delete</Button>
         </div>
       ))}
     </div>
