@@ -21,8 +21,6 @@ const updatePerson = (id, newName, newNumber) => {
     
 };
 
-
-/*!!! doesnt refresh page, maybe due to async? !!!*/
 const deletePerson =  async (id) => {
   const prsn = ( await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
   if(confirm(`Are you sure you want to delete ${prsn}`)){
@@ -39,7 +37,7 @@ const deletePerson =  async (id) => {
 };
 
 const addName = (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   
   /*
   >be me 
@@ -78,4 +76,4 @@ const addName = (e) => {
 };
 
 
-export default { addPerson, getPersons, updatePerson, deletePerson };
+export default { addPerson, getPersons, updatePerson, deletePerson, addName };

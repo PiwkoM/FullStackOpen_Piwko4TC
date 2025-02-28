@@ -101,7 +101,7 @@ const App = () => {
       <Filter finder={finder} findName={findName} />
 
       <h3>Add a new</h3>
-      <PersonForm newName={newName} newNumber={newNumber} inputChange={inputChange} inputChange_num={inputChange_num} addName={BackEnd.addName()} />
+      <PersonForm newName={newName} newNumber={newNumber} inputChange={inputChange} inputChange_num={inputChange_num} addName={(e) => { e.preventDefault(); BackEnd.addName()}} />
 
       <h3>Numbers</h3>
       <Persns persons={filteredPersons} />
