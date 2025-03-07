@@ -13,6 +13,8 @@ const App = () => {
   const [vis, setVisibility] = useState(true)
   const [errcheck, setCheck] = useState(true)
 
+  const toggleVisibility = () => setVisibility(!vis);
+
   useEffect(() => {
     BackEnd.getPersons().then(response => {
       setPersons(response);
@@ -50,7 +52,9 @@ const App = () => {
 
   const addName = (e) => {
     e.preventDefault();
-  
+    /*
+    [IMP] if a person exists, update them, otherwise add them
+    */
     const existingPerson = persons.find(person => person.name === newName);
     if (existingPerson) {
       if (window.confirm(`${newName} is already in the phonebook. Do you want to update their number?`)) {
@@ -59,12 +63,12 @@ const App = () => {
             person.id !== updatedPerson.id ? person : updatedPerson
           ));
           setCheck(true);
-          setVisibility('visible');
+          if(vis==false) toggleVisibility();
           setNotifMessage('Person updated successfully');
           
           setTimeout(() => {
             setNotifMessage('');
-            setVisibility('hidden');
+            if(vis!=false) toggleVisibility(); toggleVisibility();
           }, 5000);
           
         }).catch(error => {
@@ -73,35 +77,47 @@ const App = () => {
           
           setTimeout(() => {
             setNotifMessage('');
-            setVisibility('hidden');
+            if(vis!=false) toggleVisibility();
           }, 5000);
         });
       }
-    } else {
+    } else { 
       BackEnd.addPerson(newName, newNumber).then(newPerson => {
         setPersons(persons.concat(newPerson));
         setNewName('');
         setNewNumber('');
         setCheck(true);
-        setVisibility('visible');
+        if(vis==false) toggleVisibility();
         setNotifMessage('Person added successfully');
         
         setTimeout(() => {
           setNotifMessage('');
-          setVisibility('hidden');
+          if(vis!=false) toggleVisibility();
         }, 5000);
       }).catch(error => {
         setCheck(false);
         setNotifMessage('ERROR ADDING ENTRY');
         
         setTimeout(() => {
-          setNotifMessage('');
+          if(vis!=false) toggleVisibility();
           setVisibility('hidden');
         }, 5000);
       });
     }
   };
   
+  
+  const deletePerson = (id) => {
+    if (window.confirm('Are you sure you want to delete this entry?')) {
+      BackEnd.deletePerson(id).then(() => {
+        setPersons(prevPersons => prevPersons.filter(person => person.id !== id));
+        if(id == null){
+          setCheck(false);
+          setNotifMessage(`Information of ${person.name} has already been removed from server`);
+        }
+      });
+    }
+  };  
   
   const filteredPersons = persons.filter(person => 
     person.name && person.name.toLowerCase().includes((finder || '').toLowerCase())
@@ -117,7 +133,7 @@ const App = () => {
       <PersonForm newName={newName} newNumber={newNumber} inputChange={inputChange} inputChange_num={inputChange_num} addName={addName} />
 
       <h3>Numbers</h3>
-      <Persns persons={filteredPersons} />
+      <Persns persons={filteredPersons} del={deletePerson}/>
     </div>
   );
 };

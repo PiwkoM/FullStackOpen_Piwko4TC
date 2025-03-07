@@ -29,8 +29,6 @@ const updatePerson = (id, newName, newNumber) => {
     .then(response => response.data);
 
 };
-
-
       /*
       !! deletion doesnt actually update the persons list, but at the same time it does, 
       resulting in error message from 2.17* not popping up and browser 2 not recognizing the fact (\n)
@@ -41,31 +39,13 @@ const updatePerson = (id, newName, newNumber) => {
 
 const deletePerson =  async (id) => {
   const prsn = ( await axios.get(`http://localhost:3001/persons/${id}`)).data.name;
-  if(confirm(`Are you sure you want to delete ${prsn}`)){
     try {
       await axios.delete(`http://localhost:3001/persons/${id}`);
       console.log(`Person with ID ${id} deleted successfully.`);
-
-
     } catch (error) {
       console.error('Error deleting person:', error);
       alert(error.response ? `Failed to delete the person: ${error.response.data.message}` : 'Failed to delete the person');
     }
-  } else {
-    console.log(`Removal of ${id} terminated`)
-  }
 };
-
-const testDelete = (id) => {
-  return axios.delete(`http://localhost:3001/persons/${id}`).then(response => {
-    if(confirm("do you want to delete?")){
-      console.log("YIPPIE!")
-    } else {
-      console.log("aborted")
-    }
-  }).catch(error => {
-    console.error("ono :(")
-  });
-}
 
 export default { addPerson, getPersons, updatePerson, deletePerson, testDelete };
