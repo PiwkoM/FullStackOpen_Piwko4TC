@@ -1,3 +1,10 @@
+'npm create vite@latest 'name' --template react' - create app folder
+'cd [name of folder]' to enter app space
+'npm install' to get all resources or whatever
+'npm run dev' to start the app
+
+
+
 bind(?)/append(?) server to json list/file : npx json-server --port 3001 --watch db.json
 run server : npm run server
 (if port 3001 is taken, close all apps using 3001 or use another port)
