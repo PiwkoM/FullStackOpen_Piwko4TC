@@ -48,4 +48,4 @@ const deletePerson =  async (id) => {
     }
 };
 
-export default { addPerson, getPersons, updatePerson, deletePerson, testDelete };
+export default { addPerson, getPersons, updatePerson, deletePerson};
