@@ -26,8 +26,8 @@ function App() {
     if(api_key == ''){console.log("no api key :3")}
     if (capital) {
       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${capital}&appid=${api_key}&units=metric`)
-        .then(response => setWeather(response.data))
-        .catch(error => console.error('Error fetching country weather', error));
+      .then(response => setWeather(response.data))
+      .catch(error => console.error('Error fetching country weather', error));
     }
   }, [capital,api_key]);
 
@@ -38,6 +38,7 @@ function App() {
     ).map(
       p => [p.name.common, p.capital, p.area, p.languages, p.flags.png, p.flags.alt]
     ));
+
     if (selectedIndex !== null) {
       setSelectedIndex(null);
     }
@@ -53,8 +54,10 @@ function App() {
     }
 
     if (filteredData.length === 1 || (filteredData.length > 1 && selectedIndex !== null)) {
+
       const data = (filteredData.length === 1 ? filteredData[0] : filteredData[selectedIndex]);
       setCapital(data[1]);
+
       return (
         <div>
           <h1>{data[0]}</h1>
@@ -67,6 +70,7 @@ function App() {
             ))}
           </ul>
           <img src={data[4]} alt={data[5]} />
+
           {weather && <p>Temperature: {weather.main.temp} Celsius</p>}
           <img
             src = {weather && `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
@@ -79,7 +83,9 @@ function App() {
           {weather && <p>Wind: {weather.wind.speed} m/s</p>}
         </div>
       );
+
     }
+
     return (
       <div>
         {filteredData.map((item, index) => (
@@ -90,6 +96,7 @@ function App() {
         ))}
       </div>
     );
+
   };
 
   return (
@@ -100,6 +107,7 @@ function App() {
       </div>
     </div>
   );
+
 }
 
 export default App;

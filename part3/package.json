@@ -1,0 +1,15 @@
+{
+  "name": "part3",
+  "version": "1.0.0",
+  "description": "i have no idea how this command works lmao",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"hi?\""
+  },
+  "keywords": [
+    "help"
+  ],
+  "author": "me",
+  "license": "ISC"
+}
