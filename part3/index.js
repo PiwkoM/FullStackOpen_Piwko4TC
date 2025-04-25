@@ -2,6 +2,7 @@ const http = require('http')
 const express = require('express')
 const app = express()
 
+app.use(express.json())
 let persons = [
   { 
     id: "1",
@@ -52,6 +53,12 @@ app.delete('/api/persons/:id', (request, response) => {
   } else {
     response.status(404).end();
   }
+})
+
+app.post('/api/persons/',(request,response) => {
+  const note = request.body
+  console.log(note)
+  response.json(note)
 })
 
 app.get('/info',(request,response) => {
