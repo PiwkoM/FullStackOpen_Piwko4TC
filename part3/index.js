@@ -23,6 +23,11 @@ let persons = [
     id: "4",
     name: "Mary Poppendieck", 
     number: "39-23-6423122"
+  },
+  {
+    id:"5",
+    name:"Wally West",
+    number: "12-34-56789"
   }
 ]
 app.get('/', (request, response) => { // localhost:3001/ , this is what appears upon entering the root of the -SERVER-, since it's hosted on port 3001 and sth like 5013
@@ -69,7 +74,7 @@ app.post('/api/persons/',(request,response) => {
   }
   persons = persons.concat(newperson)
   response.json(newPerson)
-  
+
 })
 
 app.get('/info',(request,response) => {
