@@ -33,28 +33,25 @@ app.get('/api/persons',(request,response) => {
 })
 
 
-// app.get('/api/notes', (request, response) => {
-//   response.json(notes)
-// })
 
-app.get('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  const note = persons.find(persons => persons.id === id)
+// app.get('/api/persons/:id', (request, response) => {
+//   const id = request.params.id
+//   const note = persons.find(persons => persons.id === id)
   
 
-  if (persons) {
-    response.json(persons)
-  } else {
-    response.status(404).end()
-  }
-})
+//   if (persons) {
+//     response.json(persons)
+//   } else {
+//     response.status(404).end()
+//   }
+// })
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  persons = persons.filter(persons => persons.id !== id)
+// app.delete('/api/persons/:id', (request, response) => {
+//   const id = request.params.id
+//   persons = persons.filter(persons => persons.id !== id)
 
-  response.status(204).end()
-})
+//   response.status(204).end()
+// })
 
 const PORT = 3001
 app.listen(PORT, () => {
