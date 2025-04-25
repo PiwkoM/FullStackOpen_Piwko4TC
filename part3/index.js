@@ -56,9 +56,20 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons/',(request,response) => {
-  const note = request.body
-  console.log(note)
-  response.json(note)
+  const body = request.body
+
+  if (!body.name || !body.number) {
+    return response.status(400).end()
+  }
+
+  const newPerson = {
+    id: Math.floor(Math.random()*2137+(persons.length-1)),
+    name: "perkele",
+    number: "11-11-11-11-11-111-11"
+  }
+  persons = persons.concat(newperson)
+  response.json(newPerson)
+  
 })
 
 app.get('/info',(request,response) => {

@@ -1,8 +1,7 @@
 POST http://localhost/api/persons
-COntent-Type: application/json
+Content-Type: application/json
 
 {
-    "id": "5",
-    "name":"Perkele Ferkele",
-    "number": "111-213-567"
+  "name": "John Doe",
+  "number": "123-456-7890"
 }
