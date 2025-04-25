@@ -2,51 +2,56 @@ const http = require('http')
 const express = require('express')
 const app = express()
 
-let notes = [
-  {
+let persons = [
+  { 
     id: "1",
-    content: "HTML is easy",
-    important: true
+    name: "Arto Hellas", 
+    number: "040-123456"
   },
-  {
+  { 
     id: "2",
-    content: "Browser can execute only JavaScript",
-    important: false
+    name: "Ada Lovelace", 
+    number: "39-44-5323523"
   },
-  {
+  { 
     id: "3",
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true
+    name: "Dan Abramov", 
+    number: "12-43-234345"
+  },
+  { 
+    id: "4",
+    name: "Mary Poppendieck", 
+    number: "39-23-6423122"
   }
 ]
-// const app = http.createServer((request, response) => {
-//   response.writeHead(200, { 'Content-Type': 'application/json' })
-//   response.end(JSON.stringify(notes))
+app.get('/', (request, response) => { // localhost:3001/ , this is what appears upon entering the root of the -SERVER-, since it's hosted on port 3001 and sth like 5013
+  response.send('<h1>Testing</h1>')
+})
+
+app.get('/api/persons',(request,response) => {
+  response.json(persons)
+})
+
+
+// app.get('/api/notes', (request, response) => {
+//   response.json(notes)
 // })
 
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
-})
-
-app.get('/api/notes', (request, response) => {
-  response.json(notes)
-})
-
-app.get('/api/notes/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response) => {
   const id = request.params.id
-  const note = notes.find(note => note.id === id)
+  const note = persons.find(persons => persons.id === id)
   
 
-  if (note) {
-    response.json(note)
+  if (persons) {
+    response.json(persons)
   } else {
     response.status(404).end()
   }
 })
 
-app.delete('/api/notes/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
-  notes = notes.filter(note => note.id !== id)
+  persons = persons.filter(persons => persons.id !== id)
 
   response.status(204).end()
 })
