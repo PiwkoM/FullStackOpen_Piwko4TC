@@ -5,8 +5,11 @@ var morgan = require('morgan')
 
 
 app.use(express.json())
-morgan.token('person-data', (req) => JSON.stringify(req.body))
-app.use(morgan(':method :url :status :response[content-length] :response-time ms :person-data'))
+morgan.token('person-data', (req) => JSON.stringify(req.body));
+morgan.token('res-content-length', (req, res) => res.get('content-length') || '-'); 
+
+app.use(morgan(':method :url :status :res-content-length :response-time ms :person-data'));
+
 let persons = [
   { 
     id: "1",
