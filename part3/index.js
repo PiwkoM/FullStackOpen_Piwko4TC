@@ -31,7 +31,7 @@ let persons = [
   }
 ]
 app.get('/', (request, response) => { // localhost:3001/ , this is what appears upon entering the root of the -SERVER-, since it's hosted on port 3001 and sth like 5013
-  response.send('<h1>Testing</h1>')
+  response.send('<h1>Server or something</h1>')
 })
 
 app.get('/api/persons',(request,response) => {
@@ -64,14 +64,19 @@ app.post('/api/persons/',(request,response) => {
   const body = request.body
 
   if (!body.name || !body.number) {
-    return response.status(400).end()
+    return response.status(400).end({error: 'missing data'})
+  }
+
+  if(persons.find(n => n.name === body.name)){
+    return response.status(400).end({error: 'name must be unique'})
   }
 
   const newPerson = {
     id: Math.floor(Math.random()*2137+(persons.length-1)),
-    name: "perkele",
-    number: "11-11-11-11-11-111-11"
+    name: body.name != null ? body.name : "Placeholder",
+    number: body.number != null ? body.number : "11-22-33-44-55"
   }
+
   persons = persons.concat(newperson)
   response.json(newPerson)
 
