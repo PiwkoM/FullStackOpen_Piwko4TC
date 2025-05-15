@@ -8,9 +8,10 @@ import axios from "axios";
   EX: .put(x,y) = put/replace entry [y] in [x]
   EX: .post(x,y) = add entry [y] to [x]
 */
+const baseURL = 'http://localhost:3001/api/persons'
 
 const getPersons = () => {
-  return axios.get('http://localhost:3001/persons').then(response => response.data);
+  return axios.get(baseURL).then(response => response.data);
 };
 
 const addPerson = (newName, newNumber) => {
@@ -18,14 +19,15 @@ const addPerson = (newName, newNumber) => {
     name: newName,
     number: newNumber,
   };
-  return axios.post('http://localhost:3001/persons', personObject).then(response => response.data);
+  return axios.post(baseURL, personObject).then(response => response.data);
 
 };
 
 // update via PUT
 const updatePerson = (id, newName, newNumber) => {
   const updatedPerson = {name:newName, number: newNumber };
-  return axios.put(`http://localhost:3001/persons/${id}`, updatedPerson)
+  var tete = baseURL+'/'+ {id}
+  return axios.put(tete, updatedPerson)
     .then(response => response.data);
 
 };
