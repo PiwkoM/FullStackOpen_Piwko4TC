@@ -1,8 +1,12 @@
 const http = require('http')
 const express = require('express')
 const app = express()
+var morgan = require('morgan')
+
 
 app.use(express.json())
+morgan.token('person-data', (req) => JSON.stringify(req.body))
+app.use(morgan(':method :url :status :response[content-length] :response-time ms :person-data'))
 let persons = [
   { 
     id: "1",
@@ -77,7 +81,7 @@ app.post('/api/persons/',(request,response) => {
     number: body.number != null ? body.number : "11-22-33-44-55"
   }
 
-  persons = persons.concat(newperson)
+  persons = persons.concat(newPerson)
   response.json(newPerson)
 
 })
