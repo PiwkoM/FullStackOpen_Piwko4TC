@@ -64,27 +64,27 @@ app.delete('/api/persons/:id', (request, response) => {
   }
 })
 
-app.post('/api/persons/',(request,response) => {
-  const body = request.body
+app.post('/api/persons/', (request, response) => {
+  const body = request.body;
 
   if (!body.name || !body.number) {
-    return response.status(400).end({error: 'missing data'})
+    return response.status(400).json({ error: 'missing data' });
   }
 
-  if(persons.find(n => n.name === body.name)){
-    return response.status(400).end({error: 'name must be unique'})
+  if (persons.find(n => n.name === body.name)) {
+    return response.status(400).json({ error: 'name must be unique' });
   }
 
   const newPerson = {
-    id: Math.floor(Math.random()*2137+(persons.length-1)),
-    name: body.name != null ? body.name : "Placeholder",
-    number: body.number != null ? body.number : "11-22-33-44-55"
-  }
+    id: Math.floor(Math.random() * 2137 + (persons.length - 1)),
+    name: body.name || "Placeholder",
+    number: body.number || "11-22-33-44-55"
+  };
 
-  persons = persons.concat(newPerson)
-  response.json(newPerson)
+  persons = persons.concat(newPerson);
+  response.json(newPerson);
+});
 
-})
 
 app.get('/info',(request,response) => {
   const date = new Date();
