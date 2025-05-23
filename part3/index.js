@@ -8,6 +8,7 @@ morgan.token('person-data', (req) => JSON.stringify(req.body));
 morgan.token('res-content-length', (req, res) => res.get('content-length') || '-'); 
 
 app.use(express.json())
+app.use(express.static('dist'))
 app.use(cors())
 app.use(morgan(':method :url :status :res-content-length :response-time ms :person-data'));
 
