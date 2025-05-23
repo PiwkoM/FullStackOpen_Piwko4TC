@@ -50,3 +50,4 @@ const deletePerson =  async (id) => {
 };
 
 export default { addPerson, getPersons, updatePerson, deletePerson};
+
