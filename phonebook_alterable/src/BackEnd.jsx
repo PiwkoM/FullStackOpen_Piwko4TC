@@ -8,7 +8,7 @@ import axios from "axios";
   EX: .put(x,y) = put/replace entry [y] in [x]
   EX: .post(x,y) = add entry [y] to [x]
 */
-const baseURL = 'http://localhost:3001/api/persons/'
+const baseURL = '/api/persons'
 
 const getPersons = () => {
   return axios.get(baseURL).then(response => response.data);
