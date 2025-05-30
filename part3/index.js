@@ -39,7 +39,7 @@ let persons = [
     number: "12-34-56789"
   }
 ]
-app.get('/', (request, response) => { // localhost:3001/ , this is what appears upon entering the root of the -SERVER-, since it's hosted on port 3001 and sth like 5013
+app.get('/', (request, response) => {
   response.send('<h1>Server or something</h1>')
 })
 
@@ -90,7 +90,6 @@ app.post('/api/persons/', (request, response) => {
   response.json(newPerson);
 });
 
-
 app.get('/info',(request,response) => {
   const date = new Date();
   response.send(`
@@ -99,27 +98,6 @@ app.get('/info',(request,response) => {
   `)
 
 })
-
-
-
-// app.get('/api/persons/:id', (request, response) => {
-//   const id = request.params.id
-//   const note = persons.find(persons => persons.id === id)
-  
-
-//   if (persons) {
-//     response.json(persons)
-//   } else {
-//     response.status(404).end()
-//   }
-// })
-
-// app.delete('/api/persons/:id', (request, response) => {
-//   const id = request.params.id
-//   persons = persons.filter(persons => persons.id !== id)
-
-//   response.status(204).end()
-// })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
