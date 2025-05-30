@@ -1,7 +1,8 @@
-const http = require('http')
+
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const Person = require('./models/person')
 var morgan = require('morgan')
 
 morgan.token('person-data', (req) => JSON.stringify(req.body));
@@ -11,6 +12,21 @@ app.use(express.json())
 app.use(express.static('dist'))
 app.use(cors())
 app.use(morgan(':method :url :status :res-content-length :response-time ms :person-data'));
+
+// var mongoose = require('mongoose')
+
+// const pass = process.argv[2]
+// const url = `mongodb+srv://fso_piwkom:${pass}@clusterfso.vie6fru.mongodb.net/FSO?retryWrites=true&w=majority&appName=ClusterFSO`
+
+// mongoose.set('strictQuery',false)
+// mongoose.connect(url)
+
+// const personSchema = new mongoose.Schema({
+//     name:String,
+//     number:String,
+// })
+
+
 
 let persons = [
   { 
@@ -39,12 +55,15 @@ let persons = [
     number: "12-34-56789"
   }
 ]
+
 app.get('/', (request, response) => {
   response.send('<h1>Server or something</h1>')
 })
 
 app.get('/api/persons',(request,response) => {
-  response.json(persons)
+  Person.find({}).then(people => {
+    response.json(people)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
