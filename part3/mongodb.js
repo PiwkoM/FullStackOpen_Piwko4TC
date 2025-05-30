@@ -26,7 +26,7 @@ const Person = mongoose.model('Person',personSchema)
 if(process.argv.length < 4){
     Person.find({}).then(result=>{
         result.forEach(person => {
-            console.log(person)
+            console.log("ttt")
           })
           mongoose.connection.close()
     })
