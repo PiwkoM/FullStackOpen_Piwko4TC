@@ -14,7 +14,7 @@ if(process.argv.length <3 || process.argv.length == 4){
 
 const pass = process.argv[2]
 
-const url = `mongodb+srv://fso_piwkom:${pass}@clusterfso.vie6fru.mongodb.net/?retryWrites=true&w=majority&appName=ClusterFSO`
+const url = `mongodb+srv://fso_piwkom:${pass}@clusterfso.vie6fru.mongodb.net/FSO?retryWrites=true&w=majority&appName=ClusterFSO`
 
 mongoose.set('strictQuery',false)
 
