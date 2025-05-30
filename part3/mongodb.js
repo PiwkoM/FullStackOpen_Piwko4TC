@@ -6,7 +6,7 @@ const personSchema = mongoose.Schema({
   number: String,
 })
 
-if(process.argv.length <3){ 
+if(process.argv.length <3 || process.argv.length == 4){ 
     console.log('insufficient arguments')
     process.exit()
 }
