@@ -14,7 +14,7 @@ if(process.argv.length <3){
 
 const pass = process.argv[2]
 
-const url = `mongodb+srv://fullstack:${pass}@clusterfso.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=ClusterFSO`
+const url = `mongodb+srv://fullstack:${pass}@cluster0.a5qfl.mongodb.net/FSO?retryWrites=true&w=majority&appName=ClusterFSO`
 
 mongoose.set('strictQuery',false)
 
