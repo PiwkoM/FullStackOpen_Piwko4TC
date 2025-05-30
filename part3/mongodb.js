@@ -6,9 +6,9 @@ const personSchema = mongoose.Schema({
   number: String,
 })
 
-if(process.argv.length <3 || process.argv.length == 4){ 
+if(process.argv.length <3){ 
     console.log('insufficient arguments')
-    process.exit()
+    process.exit(2)
 }
 
 
@@ -26,11 +26,11 @@ const Person = mongoose.model('Person',personSchema)
 if(process.argv.length < 4){
     Person.find({}).then(result=>{
         result.forEach(person => {
-            console.log("ttt")
+            console.log(person)
           })
           mongoose.connection.close()
     })
-    process.exit()
+    process.exit(2)
 }
 
 const person = new Person({
