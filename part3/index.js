@@ -25,34 +25,6 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(errorHandler) // !! make sure this is the last .use in the file
 
-// let persons = [
-//   { 
-//     id: "1",
-//     name: "Arto Hellas", 
-//     number: "040-123456"
-//   },
-//   { 
-//     id: "2",
-//     name: "Ada Lovelace", 
-//     number: "39-44-5323523"
-//   },
-//   { 
-//     id: "3",
-//     name: "Dan Abramov", 
-//     number: "12-43-234345"
-//   },
-//   { 
-//     id: "4",
-//     name: "Mary Poppendieck", 
-//     number: "39-23-6423122"
-//   },
-//   {
-//     id:"5",
-//     name:"Wally West",
-//     number: "12-34-56789"
-//   }
-// ]
-
 app.get('/', (request, response) => {
   response.send('<h1>Server or something</h1>')
 })
@@ -80,24 +52,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
 })
 
 app.post('/api/persons/', (request, response) => {
-  // const body = request.body;
-
-  // if (!body.name || !body.number) {
-  //   return response.status(400).json({ error: 'missing data' });
-  // }
-
-  // if (persons.find(n => n.name === body.name)) {
-  //   return response.status(400).json({ error: 'name must be unique' });
-  // }
-
-  // const newPerson = {
-  //   id: Math.floor(Math.random() * 2137 + (persons.length - 1)),
-  //   name: body.name || "Placeholder",
-  //   number: body.number || "11-22-33-44-55"
-  // };
-
-  // persons = persons.concat(newPerson);
-  // response.json(newPerson);
   const body = request.body
   if(!body.content){
     return response.status(404).json({error: 'content missing'})
