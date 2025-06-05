@@ -4,7 +4,7 @@ const cors = require('cors')
 const Person = require('./models/person')
 var morgan = require('morgan')
 
-require('dotenv').config()
+require('dotenv').config({path: 'dotenv.env'})
 morgan.token('person-data', (req) => JSON.stringify(req.body));
 morgan.token('res-content-length', (req, res) => res.get('content-length') || '-'); 
 
@@ -123,7 +123,7 @@ app.get('/info',(request,response) => {
 
 })
 
-app.put('api/persons/:id', (request,response, next) => {
+app.put('/api/persons/:id', (request,response, next) => {
   const {name, number} = request.body
 
   Person.findByIdAndUpdate(request.params.id).then(person => {
