@@ -53,9 +53,11 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
 app.post('/api/persons/', (request, response) => {
   const body = request.body
-  if(!body.content){
-    return response.status(404).json({error: 'content missing'})
+  
+  if (!body.name || !body.number) {
+    return response.status(400).json({ error: 'name or number missing' });
   }
+  
 
   const newPerson = new Person({
     name: body.name,
@@ -67,31 +69,28 @@ app.post('/api/persons/', (request, response) => {
   })
 
 });
-
-app.get('/info',(request,response) => {
-  const date = new Date();
-  response.send(`
-  <p>Phonebook has info for ${persons.length} people</p>
-  <p>${date.toString()} </p>
-  `)
-
-})
+app.get('/info', (request, response, next) => {
+  Person.countDocuments({}).then(count => {
+    const date = new Date();
+    response.send(`
+      <p>Phonebook has info for ${count} people</p>
+      <p>${date.toString()}</p>
+    `);
+  }) .catch(error => next(error));
+});
+  
 
 app.put('/api/persons/:id', (request,response, next) => {
   const {name, number} = request.body
 
-  Person.findByIdAndUpdate(request.params.id).then(person => {
-    if(!person){
-      return response.status(404).end()
-    } 
+  Person.findByIdAndUpdate(request.params.id,{ name, number },{ new: true, runValidators: true, context: 'query' })
+  .then(updatedPerson => {
+    if (!updatedPerson) {
+      return response.status(404).end();
+    }
+  response.json(updatedPerson);
+  }).catch(error => next(error));
 
-    person.name = name;
-    person.number = number;
-
-    return person.save().then((updatedPerson) =>{
-      response.json(updatedPerson)
-    })
-  }).catch(error => next(error))
 })
 
 const PORT = process.env.PORT
