@@ -81,7 +81,7 @@ app.get('/info', (request, response, next) => {
 });
   
 
-app.put('/api/persons/:id', (request,response, next) => {
+app.put('/api/persons//:id', (request,response, next) => {
   //const {name,number}
   // Person.findByIdAndUpdate(request.params.id,{ name, number },{ new: true, runValidators: true, context: 'query' })
   // .then(updatedPerson => {
