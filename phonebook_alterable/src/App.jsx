@@ -73,7 +73,8 @@ const App = () => {
           
         }).catch(error => {
           setCheck(false);
-          setNotifMessage('ERROR UPDATING ENTRY');
+          const backendMessage = error.response?.data?.error
+          setNotifMessage(backendMessage);
           
           setTimeout(() => {
             setNotifMessage('');
@@ -96,7 +97,8 @@ const App = () => {
         }, 5000);
       }).catch(error => {
         setCheck(false);
-        setNotifMessage('ERROR ADDING ENTRY');
+        const backendMessage = error.response?.data?.error
+        setNotifMessage(backendMessage);
         
         setTimeout(() => {
           if(vis!=false) toggleVisibility();

@@ -18,7 +18,9 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
-  } 
+  }  else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
 
   next(error)
 }
@@ -92,7 +94,7 @@ app.put('/api/persons/:id', (request,response, next) => {
   // }).catch(error => next(error));
   const newName = request.body.name
   const newNumber = request.body.number
-  Person.findByIdAndUpdate(request.params.id,{name: newName, number: newNumber}).then(updatePerson => {
+  Person.findByIdAndUpdate(request.params.id,{name: newName, number: newNumber},{new: true, runValidators: true, context: 'query'}).then(updatePerson => {
     if(!updatePerson) { return response.status(404).end()}
     response.json(updatePerson)
   }).catch(error => next(error))
