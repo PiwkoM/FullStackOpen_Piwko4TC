@@ -26,7 +26,7 @@ const addPerson = (newName, newNumber) => {
 // update via PUT
 const updatePerson = (id, newName, newNumber) => {
   const updatedPerson = {name:newName, number: newNumber };
-  return axios.put(`${baseURL}${id}`, updatedPerson)
+  return axios.put(`${baseURL}/${id}`, updatedPerson)
     .then(response => response.data);
 
 };
@@ -39,9 +39,9 @@ const updatePerson = (id, newName, newNumber) => {
       */
 
 const deletePerson =  async (id) => {
-  const prsn = ( await axios.get(`${baseURL}${id}`)).data.name;
+  const prsn = ( await axios.get(`${baseURL}/${id}`)).data.name;
     try {
-      await axios.delete(`${baseURL}${id}`);
+      await axios.delete(`${baseURL}/${id}`);
       console.log(`Person with ID ${id} deleted successfully.`);
     } catch (error) {
       console.error('Error deleting person:', error);
