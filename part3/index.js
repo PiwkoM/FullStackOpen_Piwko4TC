@@ -69,6 +69,7 @@ app.post('/api/persons/', (request, response) => {
   })
 
 });
+
 app.get('/info', (request, response, next) => {
   Person.countDocuments({}).then(count => {
     const date = new Date();
@@ -81,15 +82,20 @@ app.get('/info', (request, response, next) => {
   
 
 app.put('/api/persons/:id', (request,response, next) => {
-  const {name, number} = request.body
-
-  Person.findByIdAndUpdate(request.params.id,{ name, number },{ new: true, runValidators: true, context: 'query' })
-  .then(updatedPerson => {
-    if (!updatedPerson) {
-      return response.status(404).end();
-    }
-  response.json(updatedPerson);
-  }).catch(error => next(error));
+  //const {name,number}
+  // Person.findByIdAndUpdate(request.params.id,{ name, number },{ new: true, runValidators: true, context: 'query' })
+  // .then(updatedPerson => {
+  //   if (!updatedPerson) {
+  //     return response.status(404).end();
+  //   }
+  // response.json(updatedPerson);
+  // }).catch(error => next(error));
+  const newName = request.body.name
+  const newNumber = request.body.number
+  Person.findByIdAndUpdate(request.params.id,{name: newName, number: newNumber}).then(updatePerson => {
+    if(!updatePerson) { return response.status(404).end()}
+    response.json(updatePerson)
+  }).catch(error => next(error))
 
 })
 
