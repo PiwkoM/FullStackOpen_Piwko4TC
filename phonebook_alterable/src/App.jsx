@@ -108,7 +108,6 @@ const App = () => {
   
   
   const deletePerson = (id) => {
-    if (window.confirm('Are you sure you want to delete this entry?')) {
       BackEnd.deletePerson(id).then(() => {
         setPersons(prevPersons => prevPersons.filter(person => person.id !== id));
         if(id == null){
@@ -116,7 +115,6 @@ const App = () => {
           setNotifMessage(`Information of ${person.name} has already been removed from server`);
         }
       });
-    }
   };  
   
   const filteredPersons = persons.filter(person => 
